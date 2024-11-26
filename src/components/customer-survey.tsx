@@ -49,6 +49,7 @@ export default function CustomerSurvey() {
               <Label htmlFor="purchaseDate">Sobre a sua compra no dia</Label>
               <Input id="purchaseDate" placeholder="Data da compra" type="date" />
             </div>
+            
             <div>
               <Label>O quanto você recomendaria a Mart Minas para um amigo ou familiar?</Label>
               <Slider
