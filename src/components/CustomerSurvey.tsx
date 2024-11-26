@@ -120,20 +120,21 @@ export default function CustomerSurvey() {
                 <SelectValue placeholder="Selecione um supermercado" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="alfenas">
+                <SelectItem value="alfenas-loteamento-trevo">
                   ALFENAS (LOTEAMENTO TREVO)
                 </SelectItem>
-                <SelectItem value="araguari">ARAGUARI (SIBIPIRUNA)</SelectItem>
-                <SelectItem value="arapora">ARAPORA (X.)</SelectItem>
-                <SelectItem value="araxa">ARAXA (OROZINO TEIXEIRA)</SelectItem>
-                <SelectItem value="barbacena">
+                <SelectItem value="araguari-sibipiruna">
+                  ARAGUARI (SIBIPIRUNA)
+                </SelectItem>
+                <SelectItem value="arapora-x">ARAPORA (X.)</SelectItem>
+                <SelectItem value="araxa-orozino-teixeira">
+                  ARAXA (OROZINO TEIXEIRA)
+                </SelectItem>
+                <SelectItem value="barbacena-santo-antonio">
                   BARBACENA (SANTO ANTONIO)
                 </SelectItem>
                 <SelectItem value="belo-horizonte-diamante">
                   BELO HORIZONTE (DIAMANTE)
-                </SelectItem>
-                <SelectItem value="belo-horizonte-estoril">
-                  BELO HORIZONTE (ESTORIL)
                 </SelectItem>
                 <SelectItem value="belo-horizonte-jaqueline">
                   BELO HORIZONTE (JAQUELINE)
@@ -147,24 +148,23 @@ export default function CustomerSurvey() {
                 <SelectItem value="betim-inga-alto">
                   BETIM (INGA ALTO)
                 </SelectItem>
-                <SelectItem value="bom-despacho">
+                <SelectItem value="bom-despacho-novo-sao-jose">
                   BOM DESPACHO (NOVO SAO JOSE)
                 </SelectItem>
-                <SelectItem value="bpara-de-minas">
+                <SelectItem value="bpara-de-minas-mart-minas">
                   BPARA DE MINAS (MART MINAS)
                 </SelectItem>
-                <SelectItem value="campo-belo">
+                <SelectItem value="campo-belo-jardim-america">
                   CAMPO BELO (JARDIM AMERICA)
                 </SelectItem>
-                <SelectItem value="caratinga">CARATINGA (ZACARIAS)</SelectItem>
-                <SelectItem value="congonhas">
+                <SelectItem value="caratinga-zacarias">
+                  CARATINGA (ZACARIAS)
+                </SelectItem>
+                <SelectItem value="congonhas-jardim-vila-andreza">
                   CONGONHAS (JARDIM VILA ANDREZA)
                 </SelectItem>
-                <SelectItem value="conselheiro-lafaiete">
+                <SelectItem value="conselheiro-lafaiete-carijos">
                   CONSELHEIRO LAFAIETE (CARIJOS)
-                </SelectItem>
-                <SelectItem value="contagem-chacara-cotia">
-                  CONTAGEM (CHACARA COTIA)
                 </SelectItem>
                 <SelectItem value="contagem-cidade-industrial">
                   CONTAGEM (CIDADE INDUSTRIAL)
@@ -172,28 +172,43 @@ export default function CustomerSurvey() {
                 <SelectItem value="contagem-riacho-das-pedras">
                   CONTAGEM (RIACHO DAS PEDRAS)
                 </SelectItem>
-                <SelectItem value="curvelo">CURVELO (BELA VISTA)</SelectItem>
+                <SelectItem value="contagem-sao-joaquim">
+                  CONTAGEM (SAO JOAQUIM)
+                </SelectItem>
+                <SelectItem value="curvelo-bela-vista">
+                  CURVELO (BELA VISTA)
+                </SelectItem>
                 <SelectItem value="divinopolis-rancho-alegre">
                   DIVINOPOLIS (RANCHO ALEGRE)
                 </SelectItem>
                 <SelectItem value="divinopolis-sao-judas-tadeu">
                   DIVINOPOLIS (SAO JUDAS TADEU)
                 </SelectItem>
-                <SelectItem value="extrema">EXTREMA (TENENTES)</SelectItem>
-                <SelectItem value="governador-valadares">
+                <SelectItem value="extrema-tenentes">
+                  EXTREMA (TENENTES)
+                </SelectItem>
+                <SelectItem value="governador-valadares-santa-rita">
                   GOVERNADOR VALADARES (SANTA RITA)
                 </SelectItem>
-                <SelectItem value="itabira">ITABIRA (GABIROBA)</SelectItem>
-                <SelectItem value="itauna">ITAUNA (VILA TAVARES)</SelectItem>
-                <SelectItem value="ituiutaba">
+                <SelectItem value="itabira-gabiroba">
+                  ITABIRA (GABIROBA)
+                </SelectItem>
+                <SelectItem value="itauna-vila-tavares">
+                  ITAUNA (VILA TAVARES)
+                </SelectItem>
+                <SelectItem value="ituiutaba-gerson-baduy-ii">
                   ITUIUTABA (GERSON BADUY II)
                 </SelectItem>
-                <SelectItem value="janauba">JANAUBA (ESPLANADA)</SelectItem>
-                <SelectItem value="januaria">JANUARIA (SAO MIGUEL)</SelectItem>
-                <SelectItem value="joao-monlevade">
+                <SelectItem value="janauba-esplanada">
+                  JANAUBA (ESPLANADA)
+                </SelectItem>
+                <SelectItem value="januaria-sao-miguel">
+                  JANUARIA (SAO MIGUEL)
+                </SelectItem>
+                <SelectItem value="joao-monlevade-nova-aclimacao">
                   JOAO MONLEVADE (NOVA ACLIMACAO)
                 </SelectItem>
-                <SelectItem value="joao-pinheiro">
+                <SelectItem value="joao-pinheiro-divinopolis">
                   JOAO PINHEIRO (DIVINOPOLIS)
                 </SelectItem>
                 <SelectItem value="juiz-de-fora-industrial">
@@ -202,11 +217,13 @@ export default function CustomerSurvey() {
                 <SelectItem value="juiz-de-fora-teixeiras">
                   JUIZ DE FORA (TEIXEIRAS)
                 </SelectItem>
-                <SelectItem value="lavras">LAVRAS (JARDIM FLORESTA)</SelectItem>
-                <SelectItem value="leopoldina">
+                <SelectItem value="lavras-jardim-floresta">
+                  LAVRAS (JARDIM FLORESTA)
+                </SelectItem>
+                <SelectItem value="leopoldina-maria-guimaraes-franca">
                   LEOPOLDINA (MARIA GUIMARAES FRANCA)
                 </SelectItem>
-                <SelectItem value="monte-carmelo">
+                <SelectItem value="monte-carmelo-zona-de-expansao-urbana">
                   MONTE CARMELO (ZONA DE EXPANSAO URBANA)
                 </SelectItem>
                 <SelectItem value="montes-claros-distrito-industrial">
@@ -215,29 +232,87 @@ export default function CustomerSurvey() {
                 <SelectItem value="montes-claros-independencia">
                   MONTES CLAROS (INDEPENDENCIA)
                 </SelectItem>
-                <SelectItem value="nova-lima">
+                <SelectItem value="montes-claros-major-prates">
+                  MONTES CLAROS (MAJOR PRATES)
+                </SelectItem>
+                <SelectItem value="nova-lima-chacara-bom-retiro">
                   NOVA LIMA (CHACARA BOM RETIRO)
                 </SelectItem>
-                <SelectItem value="paracatu">
+                <SelectItem value="paracatu-amoreiras-ii">
                   PARACATU (AMOREIRAS II)
                 </SelectItem>
-                <SelectItem value="passos">PASSOS (SAO FRANCISCO)</SelectItem>
-                <SelectItem value="patos-de-minas">
+                <SelectItem value="passos-sao-francisco">
+                  PASSOS (SAO FRANCISCO)
+                </SelectItem>
+                <SelectItem value="patos-de-minas-bela-vista">
                   PATOS DE MINAS (BELA VISTA)
                 </SelectItem>
-                <SelectItem value="patrocinio">
+                <SelectItem value="patos-de-minas-jardim-andrades">
+                  PATOS DE MINAS (JARDIM ANDRADES)
+                </SelectItem>
+                <SelectItem value="patrocinio-industrial">
                   PATROCINIO (INDUSTRIAL)
                 </SelectItem>
-                <SelectItem value="tres-coracoes">
+                <SelectItem value="pirapora-cicero-passos">
+                  PIRAPORA (CICERO PASSOS)
+                </SelectItem>
+                <SelectItem value="pocos-de-caldas-jardim-paraiso">
+                  POCOS DE CALDAS (JARDIM PARAISO)
+                </SelectItem>
+                <SelectItem value="pouso-alegre-fatima-i">
+                  POUSO ALEGRE (FATIMA I)
+                </SelectItem>
+                <SelectItem value="santa-luzia-distrito-industrial-desembarga">
+                  SANTA LUZIA (DISTRITO INDUSTRIAL DESEMBARGA)
+                </SelectItem>
+                <SelectItem value="santana-do-paraiso-parque-veneza">
+                  SANTANA DO PARAISO (PARQUE VENEZA)
+                </SelectItem>
+                <SelectItem value="sao-joao-del-rei-colonia-do-marcal">
+                  SAO JOAO DEL REI (COLONIA DO MARCAL)
+                </SelectItem>
+                <SelectItem value="sete-lagoas-santo-antonio">
+                  SETE LAGOAS (SANTO ANTONIO)
+                </SelectItem>
+                <SelectItem value="teofilo-otoni-castro-pires">
+                  TEOFILO OTONI (CASTRO PIRES)
+                </SelectItem>
+                <SelectItem value="tres-coracoes-cidade-jardim">
                   TRES CORACOES (CIDADE JARDIM)
                 </SelectItem>
-                <SelectItem value="tres-pontas">
+                <SelectItem value="tres-pontas-esperanca">
                   TRES PONTAS (ESPERANCA)
                 </SelectItem>
-                <SelectItem value="uba">UBA (EIXO RODOVIARIO)</SelectItem>
+                <SelectItem value="uba-eixo-rodoviario">
+                  UBA (EIXO RODOVIARIO)
+                </SelectItem>
                 <SelectItem value="uberaba-olinda">UBERABA (OLINDA)</SelectItem>
-                <SelectItem value="uberlandia">
+                <SelectItem value="uberaba-parque-das-laranjeiras">
+                  UBERABA (PARQUE DAS LARANJEIRAS)
+                </SelectItem>
+                <SelectItem value="uberaba-santa-maria">
+                  UBERABA (SANTA MARIA)
+                </SelectItem>
+                <SelectItem value="uberlandia-jardim-botanico">
+                  UBERLANDIA (JARDIM BOTANICO)
+                </SelectItem>
+                <SelectItem value="uberlandia-jardim-patricia">
+                  UBERLANDIA (JARDIM PATRICIA)
+                </SelectItem>
+                <SelectItem value="uberlandia-nossa-senhora-das-gracas">
                   UBERLANDIA (NOSSA SENHORA DAS GRACAS)
+                </SelectItem>
+                <SelectItem value="uberlandia-segismundo-pereira">
+                  UBERLANDIA (SEGISMUNDO PEREIRA)
+                </SelectItem>
+                <SelectItem value="unai-capim-branco-ii">
+                  UNAI (CAPIM BRANCO II)
+                </SelectItem>
+                <SelectItem value="varginha-santa-maria">
+                  VARGINHA (SANTA MARIA)
+                </SelectItem>
+                <SelectItem value="vespasiano-nova-granja">
+                  VESPASIANO (NOVA GRANJA)
                 </SelectItem>
               </SelectContent>
             </Select>
@@ -250,7 +325,7 @@ export default function CustomerSurvey() {
           </div>
 
           <div>
-            <Label>
+            <Label className="font-bold">
               O quanto você recomendaria a Mart Minas para um amigo ou familiar?
             </Label>
             <Slider
@@ -274,7 +349,7 @@ export default function CustomerSurvey() {
             </div>
           </div>
           <div>
-            <Label>Avalie os seguintes aspectos:</Label>
+            <Label className="font-bold">Avalie os seguintes aspectos:</Label>
             {aspects.map((aspect, index) => (
               <div
                 key={index}
@@ -313,7 +388,7 @@ export default function CustomerSurvey() {
             ))}
           </div>
           <div>
-            <Label htmlFor="otherSupermarket">
+            <Label className="font-bold" htmlFor="otherSupermarket">
               Além da Mart Minas qual o outro supermercado que você mais
               frequenta?
             </Label>
