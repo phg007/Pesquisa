@@ -74,6 +74,17 @@ export default function CustomerSurvey() {
       }
     } catch (error) {
       console.error('Error:', error);
+        console.log(customerName);
+        console.log(purchaseDate);
+        console.log(nps);
+        console.log(aspectRatings);
+        console.log(selectedStore);
+        console.log(competitors);
+        console.log(selectedCompetitor);
+        console.log(priceComparison);
+        console.log(feedback);
+        
+
       alert('Ocorreu um erro ao enviar a pesquisa. Por favor, tente novamente.');
     }
   };
@@ -99,7 +110,7 @@ export default function CustomerSurvey() {
               value={customerName} 
               onChange={(e) => setCustomerName(e.target.value)}
               placeholder="Nome do cliente conforme cadastro" 
-              required 
+            
             />
           </div>
           <div>
@@ -109,7 +120,7 @@ export default function CustomerSurvey() {
               type="date" 
               value={purchaseDate} 
               onChange={(e) => setPurchaseDate(e.target.value)}
-              required 
+              
             />
           </div>
           <div>
