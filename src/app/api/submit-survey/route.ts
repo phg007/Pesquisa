@@ -12,36 +12,56 @@ const dbConfig = {
 
 export async function POST(request: Request) {
   try {
+    // Parse JSON body
     const body = await request.json();
+
+    // Validate if body is not null or empty
+    if (!body || typeof body !== 'object') {
+      console.error('Invalid body:', body);
+      return NextResponse.json({ message: 'Invalid request body' }, { status: 400 });
+    }
+
+    // Log the received data
+    console.log('Received body:', body);
+
+    // Validate individual fields
+    const {
+      aspectRatings = null,
+      selectedStore = null,
+      selectedCompetitor = null,
+      priceComparison = null,
+      feedback = null,
+    } = body;
+
+    console.log('aspectRatings:', aspectRatings);
+    console.log('otherSupermarket:', selectedStore);
+    console.log('otherSupermarketSpecify:', selectedCompetitor);
+    console.log('priceComparison:', priceComparison);
+    console.log('feedback:', feedback);
 
     // Create a connection to the database
     const connection = await mysql.createConnection(dbConfig);
-    console.log(connection);
 
- 
-    // Insert survey data into the database
-    await connection.execute(
-      'INSERT INTO surveys (customer_name, purchase_date, nps, aspect_ratings, other_supermarket, other_supermarket_specify, price_comparison, feedback) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-      [
-        body.customerName || "Não se Aplica",
-        body.purchaseDate ,
-        body.nps,
-        JSON.stringify(body.aspectRatings), // Certifique-se de usar JSON válido para esta coluna
-        body.selectedStore , // Substituir undefined por null
-        body.selectedStore || null,
-        body.selectedCompetitor || null,
-        body.feedback || null
-      ]
+    // Insert data into the database
+    const [result] = await connection.execute(
+      'INSERT INTO surveys (aspect_ratings, other_supermarket, other_supermarket_specify, price_comparison, feedback) VALUES (?, ?, ?, ?, ?)',
+      [aspectRatings, selectedStore, selectedCompetitor, priceComparison, feedback]
     );
 
-    // Close the database connection
+    console.log('Insert result:', result);
+
+    // Close the connection
     await connection.end();
 
-    return NextResponse.json({ message: 'Survey submitted successfully' }, { status: 200 });
+    return NextResponse.json(
+      { message: 'Survey submitted successfully' },
+      { status: 200 }
+    );
   } catch (error) {
     console.error('Error submitting survey:', error);
-  
-    return NextResponse.json({ message: 'Error submitting survey' }, { status: 500 });
+    return NextResponse.json(
+      { message: 'Error submitting survey' },
+      { status: 500 }
+    );
   }
 }
-

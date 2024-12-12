@@ -5,12 +5,11 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { NPSRating } from './NPSRating'
 import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { competitorsByLocation } from "@/data/competitors"
-import { CircleX, ThumbsDown, ThumbsUp } from "lucide-react";
+import { CircleX, ThumbsDown, ThumbsUp } from 'lucide-react';
 import Image from 'next/image'
 
 const aspects = [
@@ -25,13 +24,9 @@ const aspects = [
   "Os produtos estão bem-sinalizados com etiqueta de preço",
   "Limpeza da loja",
   "Limpeza do banheiro de cliente",
-
 ]
 
 export default function CustomerSurvey() {
-  const [customerName, setCustomerName] = useState('')
-  const [purchaseDate, setPurchaseDate] = useState('')
-  const [nps, setNps] = useState(5)
   const [aspectRatings, setAspectRatings] = useState<Record<string, string>>({})
   const [selectedStore, setSelectedStore] = useState('')
   const [competitors, setCompetitors] = useState<string[]>([])
@@ -42,12 +37,18 @@ export default function CustomerSurvey() {
   useEffect(() => {
     if (selectedStore) {
       setCompetitors(competitorsByLocation[selectedStore] || [])
-      setSelectedCompetitor('')
+    } else {
+      setCompetitors([])
     }
+    setSelectedCompetitor('')
   }, [selectedStore])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!selectedStore) {
+      alert('Por favor, selecione uma unidade antes de enviar a pesquisa.');
+      return;
+    }
     try {
       const response = await fetch('/api/submit-survey', {
         method: 'POST',
@@ -55,9 +56,6 @@ export default function CustomerSurvey() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          customerName,
-          purchaseDate,
-          nps,
           aspectRatings,
           selectedStore,
           selectedCompetitor,
@@ -74,16 +72,13 @@ export default function CustomerSurvey() {
       }
     } catch (error) {
       console.error('Error:', error);
-        console.log(customerName);
-        console.log(purchaseDate);
-        console.log(nps);
-        console.log(aspectRatings);
-        console.log(selectedStore);
-        console.log(competitors);
-        console.log(selectedCompetitor);
-        console.log(priceComparison);
-        console.log(feedback);
-        
+      // console.log(aspectRatings);
+      // console.log(selectedStore);
+      // console.log(competitors);
+      // console.log(selectedCompetitor);
+      // console.log(priceComparison);
+      // console.log(feedback);
+      
 
       alert('Ocorreu um erro ao enviar a pesquisa. Por favor, tente novamente.');
     }
@@ -101,81 +96,50 @@ export default function CustomerSurvey() {
           priority
         />
       </CardHeader>
-      <CardContent>
+      <CardContent className="pt-6">
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <Label htmlFor="customerName">Olá</Label>
-            <Input 
-              id="customerName" 
-              value={customerName} 
-              onChange={(e) => setCustomerName(e.target.value)}
-              placeholder="Nome do cliente conforme cadastro" 
-            
-            />
-          </div>
-          <div>
-            <Label htmlFor="purchaseDate">Sobre a sua compra no dia</Label>
-            <Input 
-              id="purchaseDate" 
-              type="date" 
-              value={purchaseDate} 
-              onChange={(e) => setPurchaseDate(e.target.value)}
-              
-            />
-          </div>
-          <div>
-            <Label className="font-bold">O quanto você recomendaria a Mart Minas para um amigo ou familiar?</Label>
-            <div className="mt-4">
-              <NPSRating value={nps} onChange={setNps} />
-            </div>
-            <div className="flex justify-between mt-4 text-sm text-muted-foreground">
-              <span>De jeito nenhum</span>
-              <span>Muito provável</span>
-            </div>
-          </div>
-     
           <div>
             <Label className="font-bold">Avalie os seguintes aspectos:</Label>
             {aspects.map((aspect, index) => (
               <div
-              key={index}
-              className="flex justify-between items-center mt-2"
-            >
-              <span>{aspect}</span>
-              <RadioGroup
-                onValueChange={(value) =>
-                  setAspectRatings((prev) => ({ ...prev, [aspect]: value }))
-                }
-                className="flex space-x-2"
+                key={index}
+                className="flex justify-between items-center mt-2"
               >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="like" id={`like-${index}`} />
-                  <Label htmlFor={`like-${index}`}>
-                    <ThumbsUp className="size-5 text-green-500" />
-                  </Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="dislike" id={`dislike-${index}`} />
-                  <Label htmlFor={`dislike-${index}`}>
-                    <ThumbsDown className="size-5 text-red-500" />
-                  </Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="notApply" id={`notApply-${index}`} />
-                  <Label htmlFor={`notApply-${index}`}>
-                    <div className="d-flex flex-col justify-items-center">
-                      <CircleX className="size-4 text-red-500" />
-                      <p className="text-xs">Não sei</p>
-                    </div>
-                  </Label>
-                </div>
-              </RadioGroup>
-            </div>
+                <span>{aspect}</span>
+                <RadioGroup
+                  onValueChange={(value) =>
+                    setAspectRatings((prev) => ({ ...prev, [aspect]: value }))
+                  }
+                  className="flex space-x-2"
+                >
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="like" id={`like-${index}`} />
+                    <Label htmlFor={`like-${index}`}>
+                      <ThumbsUp className="size-5 text-green-500" />
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="dislike" id={`dislike-${index}`} />
+                    <Label htmlFor={`dislike-${index}`}>
+                      <ThumbsDown className="size-5 text-red-500" />
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="notApply" id={`notApply-${index}`} />
+                    <Label htmlFor={`notApply-${index}`}>
+                      <div className="d-flex flex-col justify-items-center">
+                        <CircleX className="size-4 text-red-500" />
+                        <p className="text-xs">Não sei</p>
+                      </div>
+                    </Label>
+                  </div>
+                </RadioGroup>
+              </div>
             ))}
           </div>
           <div>
-            <Label className="font-bold" htmlFor="storeLocation">Selecione uma unidade</Label>
-            <Select onValueChange={setSelectedStore}>
+            <Label className="font-bold" htmlFor="storeLocation">Selecione uma unidade <span className="text-red-500">*</span></Label>
+            <Select onValueChange={setSelectedStore} required>
               <SelectTrigger>
                 <SelectValue placeholder="Selecione uma unidade" />
               </SelectTrigger>
@@ -188,15 +152,14 @@ export default function CustomerSurvey() {
               </SelectContent>
             </Select>
           </div>
-          {selectedStore && (
-            <div>
+          <div>
               <Label className="font-bold" htmlFor="competitor">Além da Mart Minas qual o outro supermercado que você mais frequenta?</Label>
               <Select onValueChange={setSelectedCompetitor}>
                 <SelectTrigger>
                   <SelectValue placeholder="Selecione um concorrente" />
                 </SelectTrigger>
                 <SelectContent>
-                  {competitors.map((competitor) => (
+                  {(selectedStore ? competitorsByLocation[selectedStore] : []).map((competitor) => (
                     <SelectItem key={competitor} value={competitor}>
                       {competitor}
                     </SelectItem>
@@ -204,26 +167,25 @@ export default function CustomerSurvey() {
                 </SelectContent>
               </Select>
             </div>
-          )}
-          {selectedCompetitor && (
-            <div>
-              <Label>Comparando os preços, na sua opinião os preços do {selectedCompetitor} em geral são:</Label>
-              <RadioGroup onValueChange={setPriceComparison} className="flex space-x-4 mt-2">
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="worse" id="priceWorse" />
-                  <Label htmlFor="priceWorse">Piores que na Mart Minas</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="equal" id="priceEqual" />
-                  <Label htmlFor="priceEqual">Iguais aos da Mart Minas</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="better" id="priceBetter" />
-                  <Label htmlFor="priceBetter">Melhores que na Mart Minas</Label>
-                </div>
-              </RadioGroup>
-            </div>
-          )}
+          <div>
+            <Label>
+              Comparando os preços, na sua opinião os preços {selectedCompetitor ? `do ${selectedCompetitor}` : "do concorrente"} em geral são:
+            </Label>
+            <RadioGroup onValueChange={setPriceComparison} className="flex space-x-4 mt-2">
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="worse" id="priceWorse" />
+                <Label htmlFor="priceWorse">Piores que na Mart Minas</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="equal" id="priceEqual" />
+                <Label htmlFor="priceEqual">Iguais aos da Mart Minas</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="better" id="priceBetter" />
+                <Label htmlFor="priceBetter">Melhores que na Mart Minas</Label>
+              </div>
+            </RadioGroup>
+          </div>
           <div>
             <Label htmlFor="feedback">Você gostaria de deixar alguma sugestão de melhoria, reclamação ou elogio?</Label>
             <Textarea
