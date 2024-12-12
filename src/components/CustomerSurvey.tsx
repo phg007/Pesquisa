@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-// import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
@@ -26,7 +25,7 @@ const aspects = [
   "Limpeza do banheiro de cliente",
 ]
 
-export default function CustomerSurvey() {
+export default function Home() {
   const [aspectRatings, setAspectRatings] = useState<Record<string, string>>({})
   const [selectedStore, setSelectedStore] = useState('')
   const [competitors, setCompetitors] = useState<string[]>([])
@@ -72,12 +71,12 @@ export default function CustomerSurvey() {
       }
     } catch (error) {
       console.error('Error:', error);
-      // console.log(aspectRatings);
-      // console.log(selectedStore);
-      // console.log(competitors);
-      // console.log(selectedCompetitor);
-      // console.log(priceComparison);
-      // console.log(feedback);
+      console.log(aspectRatings);
+      console.log(selectedStore);
+      console.log(competitors);
+      console.log(selectedCompetitor);
+      console.log(priceComparison);
+      console.log(feedback);
       
 
       alert('Ocorreu um erro ao enviar a pesquisa. Por favor, tente novamente.');
