@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { Suspense, useState, useEffect } from 'react';
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
@@ -26,7 +26,7 @@ const aspects = [
   "Limpeza do banheiro de cliente",
 ]
 
-export default function Home() {
+const Home = () => {
   const searchParams = useSearchParams()
   const surveyId = searchParams.get('Id')
   const [aspectRatings, setAspectRatings] = useState<Record<string, string>>({})
@@ -209,5 +209,13 @@ export default function Home() {
       </CardFooter>
     </Card>
   )
+}
+
+export default function SurveyPageWrapper() {
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <Home />
+    </Suspense>
+  );
 }
 

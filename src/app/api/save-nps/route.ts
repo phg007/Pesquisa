@@ -3,7 +3,15 @@ import { query } from '@/lib/db';
 
 export async function POST(req: Request) {
   try {
-    const { nps } = await req.json();
+    // Tenta ler o corpo JSON da requisição
+    const body = await req.json();
+
+    // Verifique se a chave 'nps' existe no corpo da requisição
+    if (!body.nps) {
+      throw new Error('A chave "nps" está faltando no corpo da requisição.');
+    }
+
+    const { nps } = body;
 
     // Insere o NPS no banco
     const result = await query<{ insertId: number }>(
@@ -16,6 +24,6 @@ export async function POST(req: Request) {
     return NextResponse.json({ surveyId });
   } catch (error) {
     console.error('Erro no banco de dados:', error);
-    return NextResponse.json({ error: 'Erro ao salvar no banco' }, { status: 500 });
+    return NextResponse.json({ error:" error Ao salvar no banco  "}, { status: 500 });
   }
 }
