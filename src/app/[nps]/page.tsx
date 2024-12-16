@@ -3,22 +3,24 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function NPSPage({ params }: { params: Promise<{ nps: string }> }) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface Params {
+  nps: string;
+}
+
+export default function NPSPage({ params }: { params: Promise<Params> }) {
   const [nps, setNps] = useState<number | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    // Função para lidar com a Promise
-    const getParams = async () => {
+    const handleNPS = async () => {
       try {
-        const resolvedParams = await params;  // Espera a Promise ser resolvida
-        const parsedNps = parseInt(resolvedParams.nps, 10);
+        // Garante que o código só executa no cliente
+        if (typeof window === 'undefined') return;
 
-        // Atualiza o estado com o valor de NPS
+        const resolvedParams = await params; // Espera a promise ser resolvida
+        const parsedNps = parseInt(resolvedParams.nps, 10);
         setNps(parsedNps);
 
-        // Envia o NPS para a API
         const response = await fetch('/api/save-nps', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -27,20 +29,26 @@ export default function NPSPage({ params }: { params: Promise<{ nps: string }> }
 
         if (response.ok) {
           const { surveyId } = await response.json();
-          // Redireciona para a página principal com o `surveyId`
           router.push(`/?Id=${surveyId}`);
         } else {
-          console.error('Erro ao salvar NPS.');
-          router.push('/'); // Redireciona em caso de erro
+          throw new Error('Erro ao salvar NPS');
         }
       } catch (error) {
-        console.error('Erro na API:', error);
+        console.error('Erro ao processar o NPS:', error);
         router.push('/');
       }
     };
 
-    getParams();
+    handleNPS();
   }, [params, router]);
 
- 
+  return (
+    <div>
+      {nps !== null ? (
+        <p>NPS recebido: {nps}</p>
+      ) : (
+        <p>Carregando...</p>
+      )}
+    </div>
+  );
 }
