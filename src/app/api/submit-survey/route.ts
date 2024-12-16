@@ -1,67 +1,31 @@
 import { NextResponse } from 'next/server';
-import mysql from 'mysql2/promise';
-
-// Database connection configuration
-const dbConfig = {
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT ? parseInt(process.env.DB_PORT, 10) : 54375,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
-};
+import { query } from '@/lib/db';
 
 export async function POST(request: Request) {
   try {
-    // Parse JSON body
     const body = await request.json();
+    const { surveyId, aspectRatings, selectedStore, selectedCompetitor, priceComparison, feedback } = body;
 
-    // Validate if body is not null or empty
-    if (!body || typeof body !== 'object') {
-      console.error('Invalid body:', body);
-      return NextResponse.json({ message: 'Invalid request body' }, { status: 400 });
+    if (!surveyId) {
+      return NextResponse.json({ message: 'Survey ID is required' }, { status: 400 });
     }
 
-    // Log the received data
-    console.log('Received body:', body);
-
-    // Validate individual fields
-    const {
-      aspectRatings = null,
-      selectedStore = null,
-      selectedCompetitor = null,
-      priceComparison = null,
-      feedback = null,
-    } = body;
-
-    console.log('aspectRatings:', aspectRatings);
-    console.log('otherSupermarket:', selectedStore);
-    console.log('otherSupermarketSpecify:', selectedCompetitor);
-    console.log('priceComparison:', priceComparison);
-    console.log('feedback:', feedback);
-
-    // Create a connection to the database
-    const connection = await mysql.createConnection(dbConfig);
-
-    // Insert data into the database
-    const [result] = await connection.execute(
-      'INSERT INTO surveys (aspect_ratings, other_supermarket, other_supermarket_specify, price_comparison, feedback) VALUES (?, ?, ?, ?, ?)',
-      [aspectRatings, selectedStore, selectedCompetitor, priceComparison, feedback]
+    await query<void>(
+      `UPDATE surveys SET 
+        aspect_ratings = ?,
+        other_supermarket = ?,
+        other_supermarket_specify = ?,
+        price_comparison = ?,
+        feedback = ?
+      
+      WHERE id = ?`,
+      [JSON.stringify(aspectRatings), selectedStore, selectedCompetitor, priceComparison, feedback, surveyId]
     );
 
-    console.log('Insert result:', result);
-
-    // Close the connection
-    await connection.end();
-
-    return NextResponse.json(
-      { message: 'Survey submitted successfully' },
-      { status: 200 }
-    );
+    return NextResponse.json({ message: 'Survey submitted successfully' }, { status: 200 });
   } catch (error) {
     console.error('Error submitting survey:', error);
-    return NextResponse.json(
-      { message: 'Error submitting survey' },
-      { status: 500 }
-    );
+    return NextResponse.json({ message: 'Error submitting survey' }, { status: 500 });
   }
 }
+

@@ -9,6 +9,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { competitorsByLocation } from "@/data/competitors"
 import { CircleX, ThumbsDown, ThumbsUp } from 'lucide-react';
+import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 
 const aspects = [
@@ -26,6 +27,8 @@ const aspects = [
 ]
 
 export default function Home() {
+  const searchParams = useSearchParams()
+  const surveyId = searchParams.get('id')
   const [aspectRatings, setAspectRatings] = useState<Record<string, string>>({})
   const [selectedStore, setSelectedStore] = useState('')
   const [competitors, setCompetitors] = useState<string[]>([])
@@ -55,6 +58,7 @@ export default function Home() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          surveyId,
           aspectRatings,
           selectedStore,
           selectedCompetitor,
@@ -62,7 +66,7 @@ export default function Home() {
           feedback,
         }),
       });
-
+  console.log("surveyId"+surveyId);
       if (response.ok) {
         alert('Obrigado por enviar a pesquisa!');
         // Reset form fields here if needed
