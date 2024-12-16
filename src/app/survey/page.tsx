@@ -1,10 +1,10 @@
 import CustomerSurvey from '@/components/CustomerSurvey'
-
+import { Suspense } from 'react';
 export default function SurveyPage() {
   return (
-    <main className="container mx-auto py-8">
+    <Suspense fallback={<div>Loading...</div>}>
       <CustomerSurvey />
-    </main>
+    </Suspense>
   )
 }
 
