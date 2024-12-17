@@ -21,7 +21,6 @@ const aspects = [
   "Atendimento de funcionários no caixa",
   "Atendimento de funcionários na loja (atenção e disposição para ajudar)",
   "Ambiente e climatização (temperatura) da loja",
-  "Os produtos estão bem-sinalizados com etiqueta de preço",
   "Limpeza da loja",
   "Limpeza do banheiro de cliente",
 ]
