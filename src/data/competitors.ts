@@ -1,4 +1,5 @@
 export const competitorsByLocation: Record<string, string[]> = {
+  
   "alfenas": ["ABC", "EPA", "SUPERMERCADO ALVORADA", "SUPERMERCADO SÃO PAULO SMART", "UNISSUL SUPERMECADO", "OUTRO"].sort(),
   "araguari": ["BAHAMAS MIX", "CARREFOUR", "SUPERMECADO TEJOTÃO", "OUTRO"].sort(),
   "arapora": ["ATACADÃO", "BRETAS", "LUCAS SUPERMECADOS", "SUPERMECADO REIS", "OUTRO"].sort(),
