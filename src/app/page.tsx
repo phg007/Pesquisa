@@ -161,7 +161,7 @@ const Home = () => {
               <Label className="font-bold" htmlFor="competitor">Além da Mart Minas qual o outro supermercado que você mais frequenta?</Label>
               <Select onValueChange={setSelectedCompetitor}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Selecione um concorrente" />
+                  <SelectValue placeholder="Selecione um opção" />
                 </SelectTrigger>
                 <SelectContent>
                   {(selectedStore ? competitorsByLocation[selectedStore] : []).map((competitor) => (
