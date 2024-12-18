@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { competitorsByLocation } from '@/data/competitors';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-
+import { cn } from "@/lib/utils";
 import { CircleX, ThumbsDown, ThumbsUp } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
@@ -142,33 +142,47 @@ const Home = () => {
             <div>
               <Label className="font-bold">Avalie os seguintes aspectos:</Label>
               {aspects.map((aspect, index) => (
-                <div key={index} className="flex justify-between items-center mt-2">
-                  <span>{aspect}</span>
-                  <RadioGroup
-                    onValueChange={(value) =>
-                      setAspectRatings((prev) => ({ ...prev, [aspect]: value }))
-                    }
-                    className="flex space-x-2"
-                  >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="like" id={`like-${index}`} />
-                      <Label htmlFor={`like-${index}`}>
-                        <ThumbsUp className="size-5 text-green-500" />
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="dislike" id={`dislike-${index}`} />
-                      <Label htmlFor={`dislike-${index}`}>
-                        <ThumbsDown className="size-5 text-red-500" />
-                      </Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="notApply" id={`notApply-${index}`} />
-                      <Label htmlFor={`notApply-${index}`}>
-                        <CircleX className="size-4 text-red-500" />
-                      </Label>
-                    </div>
-                  </RadioGroup>
+                <div
+                  key={index}
+                  className="flex flex-col mt-2 pb-2 border-b border-gray-200"
+                >
+                  <div className="flex justify-between items-center">
+                    <span>{aspect}</span>
+                    <RadioGroup
+                      onValueChange={(value) =>
+                        setAspectRatings((prev) => ({ ...prev, [aspect]: value }))
+                      }
+                      className="flex space-x-2"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="like" id={`like-${index}`} />
+                        <Label htmlFor={`like-${index}`}>
+                          <ThumbsUp className="size-5 text-green-500" />
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem 
+                          value="dislike" 
+                          id={`dislike-${index}`}
+                          className={cn(
+                            aspectRatings[aspect] === "dislike" && "border-red-500 text-red-500"
+                          )}
+                        />
+                        <Label htmlFor={`dislike-${index}`}>
+                          <ThumbsDown className="size-5 text-red-500" />
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="notApply" id={`notApply-${index}`} />
+                        <Label htmlFor={`notApply-${index}`}>
+                          <div className="d-flex flex-col justify-items-center">
+                            <CircleX className="size-4 text-red-500" />
+                            <p className="text-xs">Não sei</p>
+                          </div>
+                        </Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
                 </div>
               ))}
             </div>
