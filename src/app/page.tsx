@@ -10,7 +10,7 @@ import { competitorsByLocation } from '@/data/competitors';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { cn } from "@/lib/utils";
 import { CircleX, ThumbsDown, ThumbsUp } from 'lucide-react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter  } from 'next/navigation';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import Image from 'next/image';
 
@@ -35,6 +35,8 @@ interface DialogState {
 }
 
 const Home = () => {
+  const router = useRouter();
+
   const searchParams = useSearchParams();
   const surveyId = searchParams.get('Id');
   const [aspectRatings, setAspectRatings] = useState<Record<string, string>>({});
@@ -105,6 +107,10 @@ const Home = () => {
         message: 'Obrigado por enviar a pesquisa!',
         isError: false,
       });
+
+      setTimeout(() => {
+        router.push('/obrigado');
+      }, 2000);
 
       // Reset form fields
       setAspectRatings({});
@@ -274,15 +280,16 @@ const Home = () => {
         open={dialogState.isOpen}
         onOpenChange={(isOpen) => setDialogState((prev) => ({ ...prev, isOpen }))}
       >
+        <Dialog open={dialogState.isOpen} onOpenChange={(isOpen) => setDialogState(prev => ({ ...prev, isOpen }))}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{dialogState.title}</DialogTitle>
-            <DialogDescription>{dialogState.message}</DialogDescription>
+            <DialogDescription>
+              {dialogState.message}
+            </DialogDescription>
           </DialogHeader>
-          <Button onClick={() => setDialogState((prev) => ({ ...prev, isOpen: false }))}>
-            Fechar
-          </Button>
         </DialogContent>
+      </Dialog>
       </Dialog>
     </>
   );
