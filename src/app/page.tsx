@@ -161,14 +161,14 @@ const Home = () => {
                       className="flex space-x-2"
                     >
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="like" id={`like-${index}`} />
+                        <RadioGroupItem value="Gostei" id={`like-${index}`} />
                         <Label htmlFor={`like-${index}`}>
                           <ThumbsUp className="size-5 text-green-500" />
                         </Label>
                       </div>
                       <div className="flex items-center space-x-2">
                         <RadioGroupItem 
-                          value="dislike" 
+                          value="Não Gostei" 
                           id={`dislike-${index}`}
                           className={cn(
                             aspectRatings[aspect] === "dislike" && "border-red-500 text-red-500"
@@ -179,7 +179,7 @@ const Home = () => {
                         </Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="notApply" id={`notApply-${index}`} />
+                        <RadioGroupItem value="Não sei" id={`notApply-${index}`} />
                         <Label htmlFor={`notApply-${index}`}>
                           <div className="d-flex flex-col justify-items-center">
                             <CircleX className="size-4 text-red-500" />
@@ -231,22 +231,22 @@ const Home = () => {
 
             <div>
               <Label>
-                Comparando os preços, na sua opinião, os preços {selectedCompetitor ? `do ${selectedCompetitor}` : 'do concorrente'} em geral são:
+                Na sua opinião, os preços {selectedCompetitor ? `do ${selectedCompetitor}` : 'do concorrente'} em geral são:
               </Label>
               <RadioGroup
                 onValueChange={setPriceComparison}
                 className="flex space-x-4 mt-2"
               >
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="worse" id="priceWorse" />
+                  <RadioGroupItem value="Piores que na Mart Minas" id="priceWorse" />
                   <Label htmlFor="priceWorse">Piores que na Mart Minas</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="equal" id="priceEqual" />
+                  <RadioGroupItem value="Iguais aos da Mart Minas" id="priceEqual" />
                   <Label htmlFor="priceEqual">Iguais aos da Mart Minas</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="better" id="priceBetter" />
+                  <RadioGroupItem value="Melhores que na Mart Minas" id="priceBetter" />
                   <Label htmlFor="priceBetter">Melhores que na Mart Minas</Label>
                 </div>
               </RadioGroup>
