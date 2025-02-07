@@ -231,7 +231,7 @@ const Home = () => {
 
             <div>
               <Label>
-                Em relação aos preços, você considera o Mart Minas:
+                Em relação aos <strong>preços </strong>, você considera o Mart Minas 
                 {/* Na sua opinião, os preços {selectedCompetitor ? `do ${selectedCompetitor}` : 'do concorrente'} em geral são: */}
 
               </Label>
