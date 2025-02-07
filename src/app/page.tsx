@@ -231,7 +231,9 @@ const Home = () => {
 
             <div>
               <Label>
-                Na sua opinião, os preços {selectedCompetitor ? `do ${selectedCompetitor}` : 'do concorrente'} em geral são:
+                Em relação aos preços, você considera o Mart Minas:
+                {/* Na sua opinião, os preços {selectedCompetitor ? `do ${selectedCompetitor}` : 'do concorrente'} em geral são: */}
+
               </Label>
               <RadioGroup
                 onValueChange={setPriceComparison}
@@ -239,15 +241,15 @@ const Home = () => {
               >
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="Piores que na Mart Minas" id="priceWorse" />
-                  <Label htmlFor="priceWorse">Piores que na Mart Minas</Label>
+                  <Label htmlFor="priceWorse">Mais barato que os concorentes</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="Iguais aos da Mart Minas" id="priceEqual" />
-                  <Label htmlFor="priceEqual">Iguais aos da Mart Minas</Label>
+                  <Label htmlFor="priceEqual">Iguais aos da concorrentes</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="Melhores que na Mart Minas" id="priceBetter" />
-                  <Label htmlFor="priceBetter">Melhores que na Mart Minas</Label>
+                  <Label htmlFor="priceBetter">Mais caro que os concorrentes</Label>
                 </div>
               </RadioGroup>
             </div>
