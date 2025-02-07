@@ -245,7 +245,7 @@ const Home = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="Iguais aos da Mart Minas" id="priceEqual" />
-                  <Label htmlFor="priceEqual">Iguais aos da concorrentes</Label>
+                  <Label htmlFor="priceEqual">Iguais aos concorrentes</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="Melhores que na Mart Minas" id="priceBetter" />
