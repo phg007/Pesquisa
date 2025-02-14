@@ -1,54 +1,60 @@
-'use client';
+import Image from "next/image";
+import Link from "next/link";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-
-interface Params {
-  nps: string;
-}
-
-export default function NPSPage({ params }: { params: Promise<Params> }) {
-  const [nps, setNps] = useState<number | null>(null);
-  const router = useRouter();
-
-  useEffect(() => {
-    const handleNPS = async () => {
-      try {
-        // Garante que o código só executa no cliente
-        if (typeof window === 'undefined') return;
-
-        const resolvedParams = await params; // Espera a promise ser resolvida
-        const parsedNps = parseInt(resolvedParams.nps, 10);
-        setNps(parsedNps);
-
-        const response = await fetch('/api/save-nps', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nps: parsedNps }),
-        });
-
-        if (response.ok) {
-          const { surveyId } = await response.json();
-          router.push(`/?Id=${surveyId}`);
-        } else {
-          throw new Error('Erro ao salvar NPS');
-        }
-      } catch (error) {
-        console.error('Erro ao processar o NPS:', error);
-        router.push('/');
-      }
-    };
-
-    handleNPS();
-  }, [params, router]);
+export default function NPSSurvey({ params }: { params: { loja: string } }) {
+  const ratings = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const { loja } = params;
 
   return (
-    <div>
-      {nps !== null ? (
-        <p>NPS recebido: {nps}</p>
-      ) : (
-        <p>Carregando...</p>
-      )}
+    <div className="max-w-4xl mx-auto">
+      <Image
+        src="/html-nps_01.png"
+        width={800}
+        height={518}
+        alt="NPS Survey Header"
+        className="w-full"
+      />
+
+      <div className="flex justify-between">
+        {ratings.map((rating) => (
+          <Link
+            key={rating}
+            href={`http://localhost:3000//${rating}/${loja}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
+          >
+            <Image
+              src={`/html-nps_${(rating + 2).toString().padStart(2, "0")}.png`}
+              width={rating === 0 || rating === 10 ? 99 : 65}
+              height={187}
+              alt={`Rate ${rating}`}
+            />
+          </Link>
+        ))}
+      </div>
+
+      <Link
+        href="https://qrco.de/appmartminas"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Image
+          src="/html-nps_14.png"
+          width={800}
+          height={371}
+          alt="Download our app"
+          className="w-full"
+        />
+      </Link>
+
+      <Image
+        src="/html-nps_14-14.png"
+        width={800}
+        height={431}
+        alt="Footer image"
+        className="w-full"
+      />
     </div>
   );
 }
