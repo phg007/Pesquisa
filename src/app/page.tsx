@@ -1,30 +1,48 @@
-'use client';
+"use client";
 
-import { Suspense, useState, useEffect } from 'react';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { competitorsByLocation } from '@/data/competitors';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Suspense, useState, useEffect } from "react";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+} from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { competitorsByLocation } from "@/data/competitors";
+import { CircleX, ThumbsDown, ThumbsUp } from "lucide-react";
+import { useSearchParams, useRouter } from "next/navigation";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { CircleX, ThumbsDown, ThumbsUp } from 'lucide-react';
-import { useSearchParams, useRouter  } from 'next/navigation';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import Image from 'next/image';
 
 const aspects = [
-  'Preços em geral',
-  'Facilidade para encontrar/ler as etiquetas de preço',
-  'Disponibilidade dos produtos que costumo comprar',
-  'Qualidade dos produtos do setor de frutas, legumes e verduras',
-  'Tempo de espera no caixa',
-  'Atendimento de funcionários no caixa',
-  'Atendimento de funcionários na loja (atenção e disposição para ajudar)',
-  'Ambiente e climatização (temperatura) da loja',
-  'Limpeza da loja',
-  'Limpeza do banheiro de cliente',
+  "Preços em geral",
+  "Facilidade para encontrar/ler as etiquetas de preço",
+  "Disponibilidade dos produtos que costumo comprar",
+  "Qualidade dos produtos do setor de frutas, legumes e verduras",
+  "Tempo de espera no caixa",
+  "Atendimento de funcionários no caixa",
+  "Atendimento de funcionários na loja (atenção e disposição para ajudar)",
+  "Ambiente e climatização (temperatura) da loja",
+  "Os produtos estão bem-sinalizados com etiqueta de preço",
+  "Limpeza da loja",
+  "Limpeza do banheiro de cliente",
 ];
 
 interface DialogState {
@@ -34,97 +52,83 @@ interface DialogState {
   isError: boolean;
 }
 
-const Home = () => {
+function Home() {
   const router = useRouter();
-
   const searchParams = useSearchParams();
-  const surveyId = searchParams.get('Id');
-  const [aspectRatings, setAspectRatings] = useState<Record<string, string>>({});
-  const [selectedStore, setSelectedStore] = useState('');
+  const surveyId = searchParams.get("id");
+  const storeFromUrl = searchParams.get("store");
+  const [aspectRatings, setAspectRatings] = useState<Record<string, string>>(
+    {}
+  );
+  const [selectedStore, setSelectedStore] = useState(storeFromUrl || "");
   const [competitors, setCompetitors] = useState<string[]>([]);
-  const [selectedCompetitor, setSelectedCompetitor] = useState('');
-  const [priceComparison, setPriceComparison] = useState('');
-  const [feedback, setFeedback] = useState('');
+  const [selectedCompetitor, setSelectedCompetitor] = useState("");
+  const [priceComparison, setPriceComparison] = useState("");
+  const [feedback, setFeedback] = useState("");
   const [dialogState, setDialogState] = useState<DialogState>({
     isOpen: false,
-    title: '',
-    message: '',
+    title: "",
+    message: "",
     isError: false,
   });
 
   useEffect(() => {
     if (selectedStore) {
-      const storeCompetitors = competitorsByLocation[selectedStore] || [];
-      setCompetitors(storeCompetitors);
+      setCompetitors(competitorsByLocation[selectedStore] || []);
     } else {
       setCompetitors([]);
     }
-    setSelectedCompetitor('');
+    setSelectedCompetitor("");
   }, [selectedStore]);
+
+  useEffect(() => {
+    if (storeFromUrl) {
+      setSelectedStore(storeFromUrl);
+    }
+  }, [storeFromUrl]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!selectedStore) {
-
       setDialogState({
         isOpen: true,
-        title: 'Erro',
-        message:  'Por favor, selecione uma unidade antes de enviar a pesquisa.',
+        title: "Erro",
+        message: "Por favor, selecione uma unidade antes de enviar a pesquisa.",
         isError: true,
       });
       return;
     }
-
     try {
-      const surveyData = {
+      console.log("Simulando envio de dados da pesquisa:", {
         surveyId,
         aspectRatings,
         selectedStore,
         selectedCompetitor,
         priceComparison,
         feedback,
-      };
-
-      console.log('Submitting survey data:', surveyData);
-
-      const response = await fetch('/api/submit-survey', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(surveyData),
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
-      }
+      // Simular um atraso de 1 segundo para imitar uma chamada de API
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       setDialogState({
         isOpen: true,
-        title: 'Sucesso',
-        message: 'Obrigado por enviar a pesquisa!',
+        title: "Sucesso",
+        message: "Obrigado por enviar a pesquisa!",
         isError: false,
       });
 
+      // Redirecionar para a página de agradecimento após 2 segundos
       setTimeout(() => {
-        router.push('/obrigado');
+        router.push("/obrigado");
       }, 2000);
-
-      // Reset form fields
-      setAspectRatings({});
-      setSelectedStore('');
-      setSelectedCompetitor('');
-      setPriceComparison('');
-      setFeedback('');
-      
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Erro ao simular envio da pesquisa:", error);
       setDialogState({
         isOpen: true,
-        title: 'Erro',
-        message: error instanceof Error ? error.message : 'Ocorreu um erro desconhecido ao enviar a pesquisa. Por favor, tente novamente.',
+        title: "Erro",
+        message:
+          "Ocorreu um erro ao enviar a pesquisa. Por favor, tente novamente.",
         isError: true,
       });
     }
@@ -156,22 +160,26 @@ const Home = () => {
                     <span>{aspect}</span>
                     <RadioGroup
                       onValueChange={(value) =>
-                        setAspectRatings((prev) => ({ ...prev, [aspect]: value }))
+                        setAspectRatings((prev) => ({
+                          ...prev,
+                          [aspect]: value,
+                        }))
                       }
                       className="flex space-x-2"
                     >
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="Gostei" id={`like-${index}`} />
+                        <RadioGroupItem value="like" id={`like-${index}`} />
                         <Label htmlFor={`like-${index}`}>
                           <ThumbsUp className="size-5 text-green-500" />
                         </Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem 
-                          value="Não Gostei" 
+                        <RadioGroupItem
+                          value="dislike"
                           id={`dislike-${index}`}
                           className={cn(
-                            aspectRatings[aspect] === "dislike" && "border-red-500 text-red-500"
+                            aspectRatings[aspect] === "dislike" &&
+                              "border-red-500 text-red-500"
                           )}
                         />
                         <Label htmlFor={`dislike-${index}`}>
@@ -179,7 +187,10 @@ const Home = () => {
                         </Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="Não sei" id={`notApply-${index}`} />
+                        <RadioGroupItem
+                          value="notApply"
+                          id={`notApply-${index}`}
+                        />
                         <Label htmlFor={`notApply-${index}`}>
                           <div className="d-flex flex-col justify-items-center">
                             <CircleX className="size-4 text-red-500" />
@@ -192,32 +203,38 @@ const Home = () => {
                 </div>
               ))}
             </div>
-
             <div>
               <Label className="font-bold" htmlFor="storeLocation">
                 Selecione uma unidade <span className="text-red-500">*</span>
               </Label>
-              <Select onValueChange={setSelectedStore} required>
+              <Select
+                onValueChange={setSelectedStore}
+                value={selectedStore}
+                required
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecione uma unidade" />
                 </SelectTrigger>
                 <SelectContent>
                   {Object.keys(competitorsByLocation).map((location) => (
                     <SelectItem key={location} value={location}>
-                      {location.replace(/-/g, ' ').toUpperCase()}
+                      {location.replace(/-/g, " ").toUpperCase()}
                     </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
             </div>
-
             <div>
               <Label className="font-bold" htmlFor="competitor">
-                Além da Mart Minas, qual outro supermercado você mais frequenta?
+                Além da Mart Minas qual o outro supermercado que você mais
+                frequenta?
               </Label>
-              <Select onValueChange={setSelectedCompetitor}>
+              <Select
+                onValueChange={setSelectedCompetitor}
+                value={selectedCompetitor}
+              >
                 <SelectTrigger>
-                  <SelectValue placeholder="Selecione uma opção" />
+                  <SelectValue placeholder="Selecione uma das opções" />
                 </SelectTrigger>
                 <SelectContent>
                   {competitors.map((competitor) => (
@@ -228,35 +245,39 @@ const Home = () => {
                 </SelectContent>
               </Select>
             </div>
-
             <div>
               <Label>
-                Em relação aos <strong>preços </strong>, você considera o Mart Minas 
-                {/* Na sua opinião, os preços {selectedCompetitor ? `do ${selectedCompetitor}` : 'do concorrente'} em geral são: */}
-
+                Comparando os preços, na sua opinião os preços{" "}
+                {selectedCompetitor
+                  ? `do ${selectedCompetitor}`
+                  : "do concorrente"}{" "}
+                em geral são:
               </Label>
               <RadioGroup
                 onValueChange={setPriceComparison}
+                value={priceComparison}
                 className="flex space-x-4 mt-2"
               >
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="Piores que na Mart Minas" id="priceWorse" />
-                  <Label htmlFor="priceWorse">Mais barato que os concorentes</Label>
+                  <RadioGroupItem value="worse" id="priceWorse" />
+                  <Label htmlFor="priceWorse">Piores que na Mart Minas</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="Iguais aos da Mart Minas" id="priceEqual" />
-                  <Label htmlFor="priceEqual">Iguais aos concorrentes</Label>
+                  <RadioGroupItem value="equal" id="priceEqual" />
+                  <Label htmlFor="priceEqual">Iguais aos da Mart Minas</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="Melhores que na Mart Minas" id="priceBetter" />
-                  <Label htmlFor="priceBetter">Mais caro que os concorrentes</Label>
+                  <RadioGroupItem value="better" id="priceBetter" />
+                  <Label htmlFor="priceBetter">
+                    Melhores que na Mart Minas
+                  </Label>
                 </div>
               </RadioGroup>
             </div>
-
             <div>
               <Label htmlFor="feedback">
-                Você gostaria de deixar alguma sugestão de melhoria, reclamação ou elogio?
+                Você gostaria de deixar alguma sugestão de melhoria, reclamação
+                ou elogio?
               </Label>
               <Textarea
                 id="feedback"
@@ -265,37 +286,36 @@ const Home = () => {
                 onChange={(e) => setFeedback(e.target.value)}
               />
             </div>
-
             <Button type="submit" className="w-full">
               Enviar pesquisa
             </Button>
           </form>
         </CardContent>
-
         <CardFooter className="flex flex-col items-center text-center text-sm text-muted-foreground">
-          <p>Agradecemos a sua participação e continue sempre enviando a sua opinião.</p>
+          <p>
+            Agradecemos a sua participação e continue sempre enviando a sua
+            opinião.
+          </p>
           <p className="font-bold mt-2">Estamos aqui POR VOCÊ!</p>
         </CardFooter>
       </Card>
 
       <Dialog
         open={dialogState.isOpen}
-        onOpenChange={(isOpen) => setDialogState((prev) => ({ ...prev, isOpen }))}
+        onOpenChange={(isOpen) =>
+          setDialogState((prev) => ({ ...prev, isOpen }))
+        }
       >
-        <Dialog open={dialogState.isOpen} onOpenChange={(isOpen) => setDialogState(prev => ({ ...prev, isOpen }))}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{dialogState.title}</DialogTitle>
-            <DialogDescription>
-              {dialogState.message}
-            </DialogDescription>
+            <DialogDescription>{dialogState.message}</DialogDescription>
           </DialogHeader>
         </DialogContent>
       </Dialog>
-      </Dialog>
     </>
   );
-};
+}
 
 export default function SurveyPageWrapper() {
   return (
