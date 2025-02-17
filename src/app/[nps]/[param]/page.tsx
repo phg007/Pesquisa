@@ -1,26 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 
-interface Params {
-  nps: string;
-  param: string;
-}
-
-export default function NPSPage({ params }: { params: Params }) {
+export default function NPSPage() {
   const [nps, setNps] = useState<number | null>(null);
   const [param, setParam] = useState<string | null>(null);
   const router = useRouter();
+  const params = useParams(); // Captura os parâmetros da URL
 
   useEffect(() => {
     const handleNPS = async () => {
       try {
-        if (typeof window === "undefined") return;
+        if (!params?.nps) return; // Verifica se o parâmetro está presente
 
-        const parsedNps = parseInt(params.nps, 10);
+        const parsedNps = parseInt(params.nps as string, 10);
         setNps(parsedNps);
-        setParam(params.param);
+        setParam(params.param as string);
 
         const response = await fetch("/api/save-nps", {
           method: "POST",
