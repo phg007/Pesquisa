@@ -247,7 +247,8 @@ function Home() {
             </div>
             <div>
               <Label>
-               Em relação aos <strong>preços</strong>, você considera o Mart Minas:
+                Em relação aos <strong>preços</strong>, você considera o Mart
+                Minas:
               </Label>
               <RadioGroup
                 onValueChange={setPriceComparison}
@@ -262,7 +263,7 @@ function Home() {
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="equal" id="priceEqual" />
-                  <Label htmlFor="priceEqual">Iguais aos concorrentes</Label>
+                  <Label htmlFor="priceEqual">Igual aos concorrentes</Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="better" id="priceBetter" />
