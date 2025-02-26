@@ -1,13 +1,23 @@
-import { NextResponse } from 'next/server';
-import { query } from '@/lib/db';
+import { NextResponse } from "next/server";
+import { query } from "@/lib/db";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { surveyId, aspectRatings, selectedStore, selectedCompetitor, priceComparison, feedback } = body;
-
+    const {
+      surveyId,
+      aspectRatings,
+      selectedStore,
+      selectedCompetitor,
+      priceComparison,
+      feedback,
+    } = body;
+    console.log(body);
     if (!surveyId) {
-      return NextResponse.json({ message: 'Survey ID is required' }, { status: 400 });
+      return NextResponse.json(
+        { message: "Nota NPS obrigatória, acesse pelo email ou QRcode" },
+        { status: 400 }
+      );
     }
 
     await query<void>(
@@ -19,13 +29,25 @@ export async function POST(request: Request) {
         feedback = ?
       
       WHERE id = ?`,
-      [JSON.stringify(aspectRatings), selectedStore, selectedCompetitor, priceComparison, feedback, surveyId]
+      [
+        JSON.stringify(aspectRatings),
+        selectedStore,
+        selectedCompetitor,
+        priceComparison,
+        feedback,
+        surveyId,
+      ]
     );
 
-    return NextResponse.json({ message: 'Survey submitted successfully' }, { status: 200 });
+    return NextResponse.json(
+      { message: "Survey submitted successfully" },
+      { status: 200 }
+    );
   } catch (error) {
-    console.error('Error submitting survey:', error);
-    return NextResponse.json({ message: 'Error submitting survey' }, { status: 500 });
+    console.error("Error submitting survey:", error);
+    return NextResponse.json(
+      { message: "Error submitting survey" },
+      { status: 500 }
+    );
   }
 }
-

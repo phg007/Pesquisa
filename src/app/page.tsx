@@ -55,7 +55,7 @@ interface DialogState {
 function Home() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const surveyId = searchParams.get("id");
+  const surveyId = searchParams.get("Id");
   const storeFromUrl = searchParams.get("store");
   const [aspectRatings, setAspectRatings] = useState<Record<string, string>>(
     {}
@@ -99,17 +99,28 @@ function Home() {
       return;
     }
     try {
-      console.log("Simulando envio de dados da pesquisa:", {
+      const surveyData = {
         surveyId,
         aspectRatings,
         selectedStore,
         selectedCompetitor,
         priceComparison,
         feedback,
-      });
+      };
 
-      // Simular um atraso de 1 segundo para imitar uma chamada de API
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch("/api/submit-survey", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(surveyData),
+      });
+      if (!response.ok) {
+        const erroData = await response.json();
+        throw new Error(
+          erroData.message || `HTTP error! status: ${response.status}`
+        );
+      }
 
       setDialogState({
         isOpen: true,
@@ -122,13 +133,20 @@ function Home() {
       setTimeout(() => {
         router.push("/obrigado");
       }, 2000);
+
+      setAspectRatings({});
+      setSelectedStore("");
+      setSelectedCompetitor("");
+      setPriceComparison("");
+      setFeedback("");
     } catch (error) {
-      console.error("Erro ao simular envio da pesquisa:", error);
+      const errorMessage =
+        error instanceof Error ? error.message : "Erro desconhecido";
       setDialogState({
         isOpen: true,
         title: "Erro",
-        message:
-          "Ocorreu um erro ao enviar a pesquisa. Por favor, tente novamente.",
+        message: errorMessage,
+        // "Ocorreu um erro ao enviar a pesquisa. Por favor, tente novamente.",
         isError: true,
       });
     }
@@ -150,7 +168,7 @@ function Home() {
         <CardContent className="pt-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <Label className="font-bold">Avalie os seguintes aspectos:</Label>
+              <Label className="font-bold">Avalie os seguintes aspecto:</Label>
               {aspects.map((aspect, index) => (
                 <div
                   key={index}
