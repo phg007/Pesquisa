@@ -16,16 +16,23 @@ export default function LandingPage() {
       <Image src="/html-nps_01.png" width={800} height={518} alt="Header" />
       <div className="flex">
         {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((score) => (
-          
-          <Link key={score} href={`/${score}/${html}`} className="block">
+          <Link
+            key={score}
+            href={`/${score}/${html}?source=qrcode`}
+            className="block"
+          >
             <Image
               src={`/html-nps_${(score + 2).toString().padStart(2, "0")}.png`}
               width={
-                score === 0 || score === 10 ? 99 :
-                score === 1 ? 65 :
-                score === 2 || score === 5 || score === 6 || score === 8 ? 68 :
-                score === 3 || score === 7 || score === 9 ? 66 :
-                67 // score === 4
+                score === 0 || score === 10
+                  ? 99
+                  : score === 1
+                  ? 65
+                  : score === 2 || score === 5 || score === 6 || score === 8
+                  ? 68
+                  : score === 3 || score === 7 || score === 9
+                  ? 66
+                  : 67 // score === 4
               }
               height={187}
               alt={`Score ${score}`}
