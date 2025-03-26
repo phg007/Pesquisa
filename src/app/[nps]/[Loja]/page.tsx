@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useParams } from "next/navigation";
+import { useRouter, useSearchParams, useParams } from "next/navigation";
 
 export default function NPSPage() {
   const [nps, setNps] = useState<number | null>(null);
@@ -10,13 +9,15 @@ export default function NPSPage() {
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const params = useParams();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const handleNPS = async () => {
       try {
         const npsParam = params.nps as string;
         const lojaParam = params.Loja as string;
-
+        const source = searchParams.get("source") ?? "email";
+        console.log(`tipo ${source}`);
         if (!npsParam || !lojaParam) {
           throw new Error("Missing NPS or loja parameter");
         }
@@ -32,7 +33,7 @@ export default function NPSPage() {
         const response = await fetch("/api/save-nps", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ nps: parsedNps, loja: lojaParam }),
+          body: JSON.stringify({ nps: parsedNps, loja: lojaParam, source }),
         });
 
         if (!response.ok) {
@@ -49,11 +50,10 @@ export default function NPSPage() {
 
         router.push(
           `/?Id=${data.surveyId}&store=${encodeURIComponent(lojaParam)}`
-   
         );
       } catch (error) {
         console.error("Erro ao processar o NPS:", error);
-         setError(error instanceof Error ? error.message : String(error));
+        setError(error instanceof Error ? error.message : String(error));
       }
     };
 
