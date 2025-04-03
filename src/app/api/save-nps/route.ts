@@ -13,11 +13,14 @@ export async function POST(req: Request) {
     }
 
     const { nps } = body;
+    const { loja } = body;
+    const otherSupermarket = loja === "loja" ? "" : loja;
     const { source } = body;
+
     // Insere o NPS no banco
     const result = await query<{ insertId: number }>(
-      "INSERT INTO surveys (nps, created_at, tipo) VALUES (?, NOW(),?)",
-      [nps, source]
+      "INSERT INTO surveys (nps, other_supermarket , created_at, tipo) VALUES (?,?, NOW(),?)",
+      [nps, otherSupermarket, source]
     );
 
     // Retorna o ID da pesquisa gerado
