@@ -198,6 +198,14 @@ export const competitorsByLocation: Record<string, string[]> = {
     "MINEIRÃO",
     "OUTRO",
   ].sort(),
+  "lagoa-santa": [
+    "SUPERMERCADOS PARANAÍBA",
+    "EPA",
+    "SUPERMERCADOS BH",
+    "SUPER NOSSO",
+    "APOIO",
+    "OUTRO",
+  ].sort(),
   lavras: ["ABC", "BRETAS", "SUPERMERCADOS BH", "OUTRO"].sort(),
   leopoldina: [
     "BAHAMAS MIX",
