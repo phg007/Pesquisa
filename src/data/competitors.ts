@@ -417,4 +417,10 @@ export const competitorsByLocation: Record<string, string[]> = {
     "Superminas Supermercados",
     "OUTRO",
   ].sort(),
+  "ribeirao-das-neves": [
+    "SUPERMERCADOS BH",
+    "EPA",
+    "SUPERMERCADO NOVO HORIZONTE",
+    "OUTRO",
+  ].sort(),
 };
