@@ -23,6 +23,12 @@ export const competitorsByLocation: Record<string, string[]> = {
     "SUPERMERCADOS BH",
     "OUTRO",
   ].sort(),
+  "belo-horizonte-floramar": [
+    "ASSAÍ",
+    "BH ATACADO E VAREJO",
+    "SUPER NOSSO",
+    "OUTRO",
+  ].sort(),
   "belo-horizonte-linha-verde": [
     "APOIO",
     "ASSAÍ",
@@ -64,6 +70,12 @@ export const competitorsByLocation: Record<string, string[]> = {
     "VILLEFORT",
     "OUTRO",
   ].sort(),
+  "betim-laranjeiras": [
+    "ASSAÍ",
+    "SUPER LUNA",
+    "SUPERMERCADOS BH",
+    "OUTRO",
+  ].sort(),
   "betim-via-expressa": [
     "ABC",
     "APOIO",
@@ -74,6 +86,14 @@ export const competitorsByLocation: Record<string, string[]> = {
     "OUTRO",
   ].sort(),
   "bom-despacho": ["FIDELIS", "SUPERMERCADOS BH", "VAP", "OUTRO"].sort(),
+  caete: [
+    "EPA",
+    "SUPERMERCADOS BH",
+    "SJ Supermercados",
+    "Supermercado Central",
+    "Superminas Supermercados",
+    "OUTRO",
+  ].sort(),
   "campo-belo": [
     "ABC",
     "CB SUPERMERCADOS",
@@ -92,6 +112,16 @@ export const competitorsByLocation: Record<string, string[]> = {
     "MINEIRÃO",
     "SUPERMERCADO BRASIL",
     "SUPERMERCADOS BH",
+    "OUTRO",
+  ].sort(),
+  "contagem-david-sarnoff": [
+    "ASSAÍ",
+    "ATACADÃO",
+    "ECONOMART",
+    "EPA",
+    "MINEIRÃO",
+    "SUPERMERCADOS BH",
+    "VILLEFORT",
     "OUTRO",
   ].sort(),
   "contagem-riacho": [
@@ -114,16 +144,6 @@ export const competitorsByLocation: Record<string, string[]> = {
     "VILLEFORT",
     "OUTRO",
   ].sort(),
-  "contagem-david-sarnoff": [
-    "ASSAÍ",
-    "ATACADÃO",
-    "ECONOMART",
-    "EPA",
-    "MINEIRÃO",
-    "SUPERMERCADOS BH",
-    "VILLEFORT",
-    "OUTRO",
-  ].sort(),
   curvelo: [
     "APOIO",
     "CORDEIRO",
@@ -131,13 +151,13 @@ export const competitorsByLocation: Record<string, string[]> = {
     "SUPERMERCADOS BH",
     "OUTRO",
   ].sort(),
-  "divinopolis-sao-judas-tadeu": [
+  "divinopolis-ipiranga": [
     "ABC",
     "SUPERMERCADOS BH",
     "VILLEFORT",
     "OUTRO",
   ].sort(),
-  "divinopolis-ipiranga": [
+  "divinopolis-sao-judas-tadeu": [
     "ABC",
     "SUPERMERCADOS BH",
     "VILLEFORT",
@@ -220,7 +240,7 @@ export const competitorsByLocation: Record<string, string[]> = {
     "SUPERMERCADO KI - JOIA",
     "OUTRO",
   ].sort(),
-  "montes-claros-major-prates": [
+  "montes-claros-distrito-industrial": [
     "BRETAS",
     "CORDEIRO",
     "SUPERMERCADOS BH",
@@ -234,7 +254,7 @@ export const competitorsByLocation: Record<string, string[]> = {
     "VILLEFORT",
     "OUTRO",
   ].sort(),
-  "montes-claros-distrito-industrial": [
+  "montes-claros-major-prates": [
     "BRETAS",
     "CORDEIRO",
     "SUPERMERCADOS BH",
@@ -252,7 +272,7 @@ export const competitorsByLocation: Record<string, string[]> = {
   "para-de-minas": ["ABC", "PANELÃO", "SUPERMERCADOS BH", "OUTRO"].sort(),
   paracatu: ["ABC", "BRETAS", "SUPERMERCADO PARACATU", "OUTRO"].sort(),
   passos: ["ABC", "ECONOMART", "SÃO JERONIMO SUPERMERCADOS", "OUTRO"].sort(),
-  "patos-de-minas-jardim-andrades": [
+  "patos-de-minas-bela-vista": [
     "ABC",
     "ATACADÃO",
     "BAHAMAS MIX",
@@ -261,7 +281,7 @@ export const competitorsByLocation: Record<string, string[]> = {
     "SUPERMERCADOS BH",
     "OUTRO",
   ].sort(),
-  "patos-de-minas-bela-vista": [
+  "patos-de-minas-jardim-andrades": [
     "ABC",
     "ATACADÃO",
     "BAHAMAS MIX",
@@ -293,7 +313,29 @@ export const competitorsByLocation: Record<string, string[]> = {
     "SUPERMERCADOS BH",
     "OUTRO",
   ].sort(),
+  "ribeirao-das-neves": [
+    "SUPERMERCADOS BH",
+    "EPA",
+    "SUPERMERCADO NOVO HORIZONTE",
+    "OUTRO",
+  ].sort(),
   "santa-luzia": ["EPA", "SUPERMERCADOS BH", "VILLEFORT", "OUTRO"].sort(),
+  "santa-luzia-sao-benedito": [
+    "DECISÃO ATACAREJO",
+    "EPA",
+    "SUPERMERCADOS BH",
+    "UBERABA SUPERMERCADOS",
+    "VILLEFORT",
+    "OUTRO",
+  ].sort(),
+  "santa-luzia-sao-joao-batista": [
+    "ATACAREJO PARANAÍBA",
+    "DECISÃO ATACAREJO",
+    "SUPERMERCADOS BH",
+    "SUPERMERCADOS KARAJAS",
+    "VILLEFORT",
+    "OUTRO",
+  ].sort(),
   "santana-do-paraiso": [
     "ASSAÍ",
     "COELHO DINIZ",
@@ -321,6 +363,13 @@ export const competitorsByLocation: Record<string, string[]> = {
     "SUPER SÔ",
     "OUTRO",
   ].sort(),
+  "sete-lagoas-distrito-industrial": [
+    "ASSAÍ",
+    "SANTA HELENA MIX",
+    "SUPERMERCADO SANTO ANTÔNIO",
+    "SUPERMERCADOS BH",
+    "OUTRO",
+  ].sort(),
   "teofilo-otoni": ["COELHO DINIZ", "EPA", "MINEIRÃO", "OUTRO"].sort(),
   "tres-coracoes": ["ABC", "SUPER RM", "SUPERMERCADOS BH", "OUTRO"].sort(),
   "tres-pontas": [
@@ -337,7 +386,7 @@ export const competitorsByLocation: Record<string, string[]> = {
     "SUPERMERCADOS BH",
     "OUTRO",
   ].sort(),
-  "uberaba-santa-maria": [
+  "uberaba-olinda": [
     "ABC",
     "ATACADÃO",
     "BAHAMAS MIX",
@@ -357,7 +406,7 @@ export const competitorsByLocation: Record<string, string[]> = {
     "VILLEFORT",
     "OUTRO",
   ].sort(),
-  "uberaba-olinda": [
+  "uberaba-santa-maria": [
     "ABC",
     "ATACADÃO",
     "BAHAMAS MIX",
@@ -367,7 +416,7 @@ export const competitorsByLocation: Record<string, string[]> = {
     "VILLEFORT",
     "OUTRO",
   ].sort(),
-  "uberlandia-segismundo-pereira": [
+  "uberlandia-jardim-botanico": [
     "ABC",
     "ASSAÍ",
     "ATACADÃO",
@@ -383,7 +432,7 @@ export const competitorsByLocation: Record<string, string[]> = {
     "CARREFOUR",
     "OUTRO",
   ].sort(),
-  "uberlandia-jardim-botanico": [
+  "uberlandia-marta-helena": [
     "ABC",
     "ASSAÍ",
     "ATACADÃO",
@@ -391,7 +440,7 @@ export const competitorsByLocation: Record<string, string[]> = {
     "CARREFOUR",
     "OUTRO",
   ].sort(),
-  "uberlandia-marta-helena": [
+  "uberlandia-segismundo-pereira": [
     "ABC",
     "ASSAÍ",
     "ATACADÃO",
@@ -409,53 +458,4 @@ export const competitorsByLocation: Record<string, string[]> = {
     "OUTRO",
   ].sort(),
   vespasiano: ["EPA", "SUPERMERCADOS BH", "OUTRO"].sort(),
-  caete: [
-    "EPA",
-    "SUPERMERCADOS BH",
-    "SJ Supermercados",
-    "Supermercado Central",
-    "Superminas Supermercados",
-    "OUTRO",
-  ].sort(),
-  "ribeirao-das-neves": [
-    "SUPERMERCADOS BH",
-    "EPA",
-    "SUPERMERCADO NOVO HORIZONTE",
-    "OUTRO",
-  ].sort(),
-  "betim-laranjeiras": [
-    "ASSAÍ",
-    "SUPER LUNA",
-    "SUPERMERCADOS BH",
-    "OUTRO",
-  ].sort(),
-  "santa-luzia-sao-joao-batista": [
-    "ATACAREJO PARANAÍBA",
-    "DECISÃO ATACAREJO",
-    "SUPERMERCADOS BH",
-    "SUPERMERCADOS KARAJAS",
-    "VILLEFORT",
-    "OUTRO",
-  ].sort(),
-  "sete-lagoas-distrito-industrial": [
-    "ASSAÍ",
-    "SANTA HELENA MIX",
-    "SUPERMERCADO SANTO ANTÔNIO",
-    "SUPERMERCADOS BH",
-    "OUTRO",
-  ].sort(),
-  "santa-luzia-sao-benedito": [
-    "DECISÃO ATACAREJO",
-    "EPA",
-    "SUPERMERCADOS BH",
-    "UBERABA SUPERMERCADOS",
-    "VILLEFORT",
-    "OUTRO",
-  ].sort(),
-  "belo-horizonte-floramar": [
-    "ASSAÍ",
-    "BH ATACADO E VAREJO",
-    "SUPER NOSSO",
-    "OUTRO",
-  ].sort(),
 };
