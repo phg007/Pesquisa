@@ -61,6 +61,21 @@ export const competitorsByLocation: Record<string, string[]> = {
     "VILLEFORT",
     "OUTRO",
   ].sort(),
+  "belo-horizonte-silva-lobo": [
+    "EPA PLUS",
+    "EPA SUPERMERCADOS",
+    "SUPER NOSSO",
+    "SUPERMERCADOS BH",
+    "VERDEMAR",
+    "OUTRO",
+  ].sort(),
+  "betim-edmeia": [
+    "ABC ATACADO E VAREJO",
+    "ATACADÃO",
+    "MINEIRÃO ATACAREJO",
+    "SUPERMERCADOS BH",
+    "OUTRO",
+  ].sort(),
   "betim-inga-alto": [
     "ABC",
     "APOIO",
@@ -175,6 +190,15 @@ export const competitorsByLocation: Record<string, string[]> = {
     "BIG MAIS",
     "COELHO DINIZ",
     "MINEIRÃO",
+    "OUTRO",
+  ].sort(),
+  ibirite: [
+    "ARRASTÃO SUPERMERCADOS",
+    "MINEIRÃO ATACAREJO",
+    "SUPER LUNA",
+    "SUPERMARKET SÃO JUDAS TADEU",
+    "SUPERMERCADO FORTALEZA",
+    "SUPERMERCADOS BH",
     "OUTRO",
   ].sort(),
   itabira: [
